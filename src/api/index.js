@@ -1,6 +1,6 @@
 // import axios from "axios";
 import fetchJsonp from "fetch-jsonp";
-import { gwg } from "@/utils/authServer";
+// import { gwg } from "@/utils/authServer";
 
 /**
  * JSONP 请求模块
