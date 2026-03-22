@@ -23,7 +23,7 @@
 import { getTXAdcode, getTXWeather, getTXAdcodeS, getTXWeatherS, getGDAdcode, getGDAdcodeI, getGDWeather, getIPV4Addr, getIPV6Addr, getOtherWeather, getHXHWeather, getXMWeather } from "@/api";
 import { Error } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
-import { Speech, stopSpeech, SpeechLocal } from "@/utils/speech";
+// import { Speech, stopSpeech, SpeechLocal } from "@/utils/speech";
 const store = mainStore();
 
 // 加载密钥
