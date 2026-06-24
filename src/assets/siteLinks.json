@@ -1,0 +1,37 @@
+[
+  {
+    "icon": "Blog",
+    "name": "博客",
+    "link": "https://blog.yeann.cn/"
+  },
+  {
+    "icon": "Cloud",
+    "name": "网盘",
+    "link": "https://pan.yeann.cn/"
+  },
+  {
+    "icon": "CompactDisc",
+    "name": "音乐",
+    "link": "https://music.yeann.cn/"
+  },
+  {
+    "icon": "Compass",
+    "name": "起始页",
+    "link": "https://nav.yeann.cn/"
+  },
+  {
+    "icon": "Book",
+    "name": "网址集",
+    "link": "https://web.yeann.cn/"
+  },
+  {
+    "icon": "Fire",
+    "name": "今日热榜",
+    "link": "https://hot.yeann.cn/"
+  },
+  {
+    "icon": "LaptopCode",
+    "name": "站点监测",
+    "link": "https://status.yeann.cn/"
+  }
+]
