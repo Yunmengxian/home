@@ -18,33 +18,81 @@
 - 🌤 天气（腾讯 / 高德 / 备用 API 自动降级）
 - 🔗 社交链接 & 站点导航
 
-## 部署
+## 快速开始
 
-本项目通过 GitHub Actions 自动构建，推送 `master` 或 `dev` 分支即可触发。
+```bash
+# 复制环境变量模板并修改
+cp .env.example .env
 
-## v5.0.0 Changelog
+# 安装依赖
+pnpm install
 
-### 移除
-- **音乐播放器模块**：删除 Music.vue、Player.vue 及相关依赖（aplayer、@worstone/vue-aplayer）
+# 本地预览
+pnpm dev
+
+# 构建
+pnpm build
+```
+
+构建产物在 `dist/` 目录，可部署到任意静态服务器。
+
+## 配置
+
+| 文件 | 说明 |
+|---|---|
+| `.env` | 站点名称、天气 Key、建站日期等 |
+| `src/assets/siteLinks.json` | 网站链接列表 |
+| `src/assets/socialLinks.json` | 社交链接 |
+| `public/images/` | 壁纸和图标 |
+
+### 天气 API
+
+支持三种天气源自动降级：腾讯位置服务 → 高德开放平台 → 教书先生 API。
+
+在 `.env` 中配置：
+
+```bash
+VITE_TX_WEATHER_KEY = ""  # 腾讯位置服务 Key
+VITE_GD_WEATHER_KEY = ""  # 高德开放平台 Key
+```
+
+若均留空则使用免费备用 API。
+
+### 壁纸
+
+在 `public/images/` 放入 `background1.jpg` ~ `background10.jpg`（可增减），通过设置面板切换。
+
+## 自动部署
+
+Push `master` 或 `dev` 分支即可触发 GitHub Actions 自动构建，产物下载见 Actions → Artifacts。
+
+## Changelog
+
+### v5.0.0
+
+**移除**
+- 音乐播放器（Music.vue / Player.vue）及相关依赖 aplayer、@worstone/vue-aplayer
 - 冗余依赖：axios、terser、fetch-jsonp
-- 无效 API：getTXAdcodeS、getTXWeatherS、getXMWeather、getPlayerList
-- 失效的 IE 跳转脚本
+- 无效 API：getTXAdcodeS / getTXWeatherS / getXMWeather / getPlayerList
+- 废弃的 IE 跳转脚本
 
-### 修复
-- `gwg is not defined` 崩溃（authServer.js 不存在）
-- Weather.vue 引用不存在的 `@/utils/speech` 模块
-- PWA CacheFirst → StaleWhileRevalidate（解决部署不更新）
-- setPlayerState 语义反了（现在传 true=播放，false=暂停）
-- 事件监听器泄漏（App.vue contextmenu/mousedown、Music.vue keydown）
+**修复**
+- `gwg is not defined` 崩溃
+- Weather.vue 引用不存在模块
+- PWA CacheFirst → StaleWhileRevalidate
+- 事件监听器泄漏（App.vue / Music.vue）
 
-### 优化
-- 天气代码重构：220 行 → 110 行，消除 8 处重复
-- 时光胶囊周/月/年从每秒重算改为每分钟重算
-- 默认壁纸每次切回重新随机
-- 手写 debounce.js → lodash-es debounce
-- siteUrl 解析抽取为共享 util
-- cursor.js 删除无用的 pt 数组遍历
-- GitHub Actions workflow 改用 pnpm + ubuntu-latest + Node 20
+**优化**
+- 天气代码重构，消除重复
+- 时光胶囊减少冗余重算
+- 壁纸随机化修复
+- 手写 debounce → lodash-es
+- shared util 抽取
+- Workflow 迁移 pnpm + Node 24
+
+**清理**
+- 删除 11 个无用文件（lint 配置、CODE_OF_CONDUCT、ISSUE_TEMPLATE、screenshots、Dockerfile 等）
+- 恢复上游 `.env.example` 模板
 
 ## License
 
