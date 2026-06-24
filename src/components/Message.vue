@@ -12,26 +12,21 @@
     <!-- 简介 -->
     <div class="description cards" @click="changeBox">
       <div class="content">
-        <Icon size="16">
-          <QuoteLeft />
-        </Icon>
+        <component :is="QuoteLeftIcon" theme="outline" size="16" fill="#ffffff" />
         <Transition name="fade" mode="out-in">
           <div :key="descriptionText.hello + descriptionText.text" class="text">
             <p>{{ descriptionText.hello }}</p>
             <p>{{ descriptionText.text }}</p>
           </div>
         </Transition>
-        <Icon size="16">
-          <QuoteRight />
-        </Icon>
+        <component :is="QuoteRightIcon" theme="outline" size="16" fill="#ffffff" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Icon } from "@vicons/utils";
-import { QuoteLeft, QuoteRight } from "@vicons/fa";
+import { QuoteLeft as QuoteLeftIcon, QuoteRight as QuoteRightIcon } from "@icon-park/vue-next";
 import { Error } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
 import { parseSiteUrl } from "@/utils/parseSiteUrl";

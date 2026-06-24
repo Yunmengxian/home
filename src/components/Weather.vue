@@ -109,6 +109,8 @@ const getWeatherData = async () => {
       try { await getHXHW(); } catch { await getOW(); }
     } else if (!txkey) {
       try { await getGDW(); } catch { try { await getHXHW(); } catch { await getOW(); } }
+    } else if (!gdkey) {
+      try { await getTXW(); } catch { try { await getHXHW(); } catch { await getOW(); } }
     } else {
       try { await getTXW(); } catch { try { await getGDW(); } catch { try { await getHXHW(); } catch { await getOW(); } } }
     }

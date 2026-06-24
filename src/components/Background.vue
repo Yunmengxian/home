@@ -30,6 +30,7 @@ import { Error } from "@icon-park/vue-next";
 const store = mainStore();
 const bgUrl = ref(null);
 const imgTimeout = ref(null);
+const bgRandom = Math.floor(Math.random() * 10 + 1);
 const emit = defineEmits(["loadComplete"]);
 
 // 更换壁纸链接
@@ -73,7 +74,7 @@ const imgLoadError = () => {
       fill: "#efefef",
     }),
   });
-  bgUrl.value = `/images/background${bgRandom}.jpg`;
+  bgUrl.value = `/images/background${Math.floor(Math.random() * 10 + 1)}.jpg`;
 };
 
 // 监听壁纸切换

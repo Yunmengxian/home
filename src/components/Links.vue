@@ -1,9 +1,7 @@
 <template>
   <div v-if="siteLinks[0]" class="links">
     <div class="line">
-      <Icon size="20">
-        <Link />
-      </Icon>
+      <component :is="siteIcon['Link']" theme="outline" size="20" fill="#ffffff" />
       <span class="title">网站列表</span>
     </div>
     <!-- 网站列表 -->
@@ -27,9 +25,7 @@
               :style="index < 3 ? 'margin-bottom: 20px' : null"
               @click="jumpLink(item)"
             >
-              <Icon size="26">
-                <component :is="siteIcon[item.icon]" />
-              </Icon>
+              <component :is="siteIcon[item.icon]" theme="outline" size="26" fill="#ffffff" />
               <span class="name text-hidden">{{ item.name }}</span>
             </div>
           </el-col>
@@ -41,9 +37,7 @@
 </template>
 
 <script setup>
-import { Icon } from "@vicons/utils";
-// 可前往 https://www.xicons.org 自行挑选并在此处引入
-import { Link, Blog, CompactDisc, Cloud, Compass, Book, Fire, LaptopCode } from "@vicons/fa";
+import { LinkOne, NotebookOne, MusicList, CloudStorage, Compass, BookOne, Fire, CodeComputer } from "@icon-park/vue-next";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Mousewheel } from "swiper/modules";
 import siteLinks from "@/assets/siteLinks.json";
@@ -60,13 +54,14 @@ const siteLinksList = computed(() => {
 
 // 网站链接图标
 const siteIcon = {
-  Blog,
-  Cloud,
-  CompactDisc,
-  Compass,
-  Book,
-  Fire,
-  LaptopCode,
+  Blog: NotebookOne,
+  Cloud: CloudStorage,
+  CompactDisc: MusicList,
+  Compass: Compass,
+  Book: BookOne,
+  Fire: Fire,
+  LaptopCode: CodeComputer,
+  Link: LinkOne,
 };
 
 // 链接跳转
@@ -75,7 +70,6 @@ const jumpLink = (data) => {
 };
 
 onMounted(() => {
-  console.log(siteLinks);
 });
 </script>
 

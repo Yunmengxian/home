@@ -47,16 +47,33 @@ class Cursor {
   }
 
   init() {
-    document.onmousemove = (e) => {
+    this._onMouseMove = (e) => {
       if (!this.pos.curr) this.move(e.clientX - 8, e.clientY - 8);
       this.pos.curr = { x: e.clientX - 8, y: e.clientY - 8 };
       this.cursor.classList.remove("hidden");
       this.render();
     };
-    document.onmouseenter = () => this.cursor.classList.remove("hidden");
-    document.onmouseleave = () => this.cursor.classList.add("hidden");
-    document.onmousedown = () => this.cursor.classList.add("active");
-    document.onmouseup = () => this.cursor.classList.remove("active");
+    this._onMouseEnter = () => this.cursor.classList.remove("hidden");
+    this._onMouseLeave = () => this.cursor.classList.add("hidden");
+    this._onMouseDown = () => this.cursor.classList.add("active");
+    this._onMouseUp = () => this.cursor.classList.remove("active");
+    document.addEventListener("mousemove", this._onMouseMove);
+    document.addEventListener("mouseenter", this._onMouseEnter);
+    document.addEventListener("mouseleave", this._onMouseLeave);
+    document.addEventListener("mousedown", this._onMouseDown);
+    document.addEventListener("mouseup", this._onMouseUp);
+  }
+
+  destroy() {
+    if (this._onMouseMove) {
+      document.removeEventListener("mousemove", this._onMouseMove);
+      document.removeEventListener("mouseenter", this._onMouseEnter);
+      document.removeEventListener("mouseleave", this._onMouseLeave);
+      document.removeEventListener("mousedown", this._onMouseDown);
+      document.removeEventListener("mouseup", this._onMouseUp);
+    }
+    if (this.cursor) this.cursor.remove();
+    if (this.scr) this.scr.remove();
   }
 
   render() {

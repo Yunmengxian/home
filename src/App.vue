@@ -17,14 +17,13 @@
         </section>
       </div>
       <!-- 移动端菜单按钮 -->
-      <Icon
+      <div
         class="menu"
-        size="24"
         v-show="!store.backgroundShow"
         @click="store.mobileOpenState = !store.mobileOpenState"
       >
-        <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
-      </Icon>
+        <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" class="i-icon" theme="outline" size="24" fill="#ffffff" />
+      </div>
       <!-- 页脚 -->
       <Transition name="fade" mode="out-in">
         <Footer class="f-ter" v-show="!store.backgroundShow && !store.setOpenState" />
@@ -37,7 +36,6 @@
 import { helloInit, checkDays } from "@/utils/getTime.js";
 import { HamburgerButton, CloseSmall } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
-import { Icon } from "@vicons/utils";
 import Loading from "@/components/Loading.vue";
 import MainLeft from "@/views/Main/Left.vue";
 import MainRight from "@/views/Main/Right.vue";
@@ -76,6 +74,16 @@ watch(
   },
 );
 
+// 屏蔽右键
+const blockContext = (e) => {
+  e.preventDefault();
+  ElMessage({
+    message: "为了浏览体验，本站禁用右键",
+    grouping: true,
+    duration: 2000,
+  });
+};
+
 // 鼠标中键事件
 const onMouseDown = (event) => {
   if (event.button == 1) {
@@ -92,14 +100,6 @@ onMounted(() => {
   cursorInit();
 
   // 屏蔽右键
-  const blockContext = (e) => {
-    e.preventDefault();
-    ElMessage({
-      message: "为了浏览体验，本站禁用右键",
-      grouping: true,
-      duration: 2000,
-    });
-  };
   document.addEventListener("contextmenu", blockContext);
 
   // 鼠标中键事件
@@ -188,9 +188,6 @@ onBeforeUnmount(() => {
     animation: fade 0.5s;
     &:active {
       transform: scale(0.95);
-    }
-    .i-icon {
-      transform: translateY(2px);
     }
     @media (min-width: 721px) {
       display: none;
